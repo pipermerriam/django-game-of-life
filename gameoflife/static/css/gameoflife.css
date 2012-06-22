@@ -5,18 +5,18 @@
 
 h1, h2, h3, h4, .replace, header, footer, .sans { font-family: Arial,Liberation Sans,DejaVu Sans,sans-serif; }
 
-h1 { color: #000000; line-height: 36px; font-size: 28px; font-weight: bold; margin-bottom: 5px; }
-h2 { color: #000000; line-height: 28px; font-size: 22px; font-weight: bold; margin-bottom: 2px; }
-h3 { color: #000000; line-height: 20px; font-size: 18px; font-weight: bold; margin-bottom: 2px; }
-h4 { color: #000000; line-height: 17px; font-size: 14px; font-weight: bold; margin-bottom: 2px; }
+h1 { line-height: 36px; font-size: 28px; font-weight: bold; margin-bottom: 5px; }
+h2 { line-height: 28px; font-size: 22px; font-weight: bold; margin-bottom: 2px; }
+h3 { line-height: 20px; font-size: 18px; font-weight: bold; margin-bottom: 2px; }
+h4 { line-height: 17px; font-size: 14px; font-weight: bold; margin-bottom: 2px; }
 p, article { margin-bottom: 10px; }
 
-body { background: #FFFFFF; color: #000000; font-family: Arial,Liberation Sans,DejaVu Sans,sans-serif; }
+body { font-family: Arial,Liberation Sans,DejaVu Sans,sans-serif; }
 
-#primary_container { background: #111111; }
+#primary_container {}
 
-a:link, a:visited { color: #A6B541; }
-a:hover, a:active { color: #6BB441; }
+a:link, a:visited {}
+a:hover, a:active {}
 
 /* Lists
 --------------------------------------------------------*/
@@ -33,7 +33,7 @@ ol { padding-left: 25px; }
 
 div.mainWrapper {margin: 0 auto; z-index: 1; overflow: hidden; position: relative;}
 
-#header, #footer {margin-top: 15px; border-bottom: #444444 5px solid; border-top: #444444 5px solid; background: #222222;}
+#header, #footer {}
 
 /* Box Sizing
 --------------------------------------------------------*/
@@ -42,55 +42,7 @@ div, span, article { box-sizing: border-box; -ms-box-sizing: border-box; -webkit
 
 /* Header Layout
 --------------------------------------------------------*/
-#header { margin-bottom: 20px; }
-#header h1 a:link, #header h1 a:hover, #header h1 a:visited, #header h1 a:active { color: #CCC; text-decoration: none; }
-
-#header nav#top-nav { margin-top: 15px; margin-bottom: 15px; }
-#header nav#top-nav a { padding: 10px 15px; border: 2px solid #666666; }
-#header nav#top-nav a:hover { background: #424242; }
-
-/* Footer Layout
---------------------------------------------------------*/
-
-#footer nav#bottom-nav { text-align: center; padding: 10px 0; }
-#footer nav#bottom-nav a { padding: 0 5px; margin: 0 5px; }
-
-/* Markdown Output Styling
---------------------------------------------------------*/
-a.markdown_link { color: #888; font-size: 14px; }
-div.markdown_inline {
-  background: #272727;
-  padding: 5px 10px; 
-  margin: 5px 0 10px;
-  border-radius: 8px;
-  -moz-border-radius: 8px;
-  -webkit-border-radius: 8px;
-  max-width: 870px;
-}
-
-div.markdown ol, div.markdown ul { margin-bottom: 15px; }
-
-div.markdown pre { 
-  font-family: monospace !important!; 
-  padding: 5px 10px; 
-  background: #111; 
-  color: #FFF; 
-  margin-bottom: 10px;
-  border-radius: 8px;
-  -moz-border-radius: 8px;
-  -webkit-border-radius: 8px;
-}
-
-div.markdown blockquote { 
-    font-family: monospace !important!; 
-    padding: 5px 10px; 
-    background: #444; 
-    color: #CCC; 
-    margin-bottom: 10px;
-    border-radius: 8px;
-    -moz-border-radius: 8px;
-    -webkit-border-radius: 8px;
-}
+#header h1 a:link, #header h1 a:hover, #header h1 a:visited, #header h1 a:active { text-decoration: none; }
 
 /* Form Elements
 --------------------------------------------------------*/

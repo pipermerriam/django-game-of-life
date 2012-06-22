@@ -9,6 +9,8 @@ urlpatterns = patterns('',
     # url(r'^$', 'gameoflife.views.home', name='home'),
     # url(r'^gameoflife/', include('gameoflife.foo.urls')),
 
+    url(r'^$', 'world.views.index', name='site_index'),
+
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 

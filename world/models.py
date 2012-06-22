@@ -1,4 +1,3 @@
-#from django.db import models
 from django.contrib.gis.db import models
 
 from django_extensions.db.fields import AutoSlugField
@@ -63,17 +62,9 @@ class Cell(Timestampable):
     - Dead cell with exactly 3 living neighbors.
     """
     generation = models.ForeignKey(Generation, related_name='cells')
+    child = models.OneToOneField('self', related_name='parent')
+
     is_alive = models.NullBooleanField()
 
     lat = models.IntegerField()
     long = models.IntegerField()
-
-
-class Embryo(Timestampable):
-    """
-    At each new generation, an embryo is spawned for each cell which is alive,
-    or is adjacent to a living cell. Embryos are used to generate the next
-    generation in chunks, rather than as a single unit.
-    """
-    generation = models.ForeignKey(Generation, related_name='embryos')
-    cell = models.OneToOneField(Cell, related_name='+')

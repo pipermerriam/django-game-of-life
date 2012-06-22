@@ -1,3 +1,11 @@
+var World = Backbone.Model.extend({
+  promptTitle: function() {
+    var title = prompt("Please enter a title for this world:");
+    this.set({title: title});
+  }
+});
+
+
 //
 // Ajax Send CSRF Protection
 // https://docs.djangoproject.com/en/dev/ref/contrib/csrf/

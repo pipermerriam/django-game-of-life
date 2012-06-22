@@ -5,6 +5,10 @@ from django.contrib.gis.db.models.query import QuerySet
 
 
 class Timestampable(models.Model):
+    """
+    Clone of TimeStampable model from django-fusionbox but which extends from
+    the GeoDjango model instead.
+    """
     created_at = models.DateTimeField(default=datetime.datetime.now)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -13,6 +17,10 @@ class Timestampable(models.Model):
 
 
 class QuerySetManager(models.GeoManager):
+    """
+    Clone of QuerySetManager from django-fusionbox that extends from the
+    GeoDjango `GeoManager` model.
+    """
     use_for_related_fields = True
 
     def get_query_set(self):
@@ -25,6 +33,11 @@ class QuerySetManager(models.GeoManager):
 
 
 class Queryable(models.Model):
+    """
+    Object which merges all parent inner QuerySet classes.  Clone of
+    ManagedQuerySet behavior from django-fusionbox with a better name and for
+    GeoDjango models.
+    """
     objects = QuerySetManager()
 
     class Meta:
