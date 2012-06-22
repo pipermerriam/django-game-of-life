@@ -48,6 +48,7 @@ class Generation(Timestampable, Queryable):
     The generation hash is the bitwise xor of all of the cell coordinates and
     states ordered by latitude, then longitude.
     """
+    generation = models.PositiveIntegerField()
     world = models.ForeignKey(World, related_name='generations')
 
     hash = models.CharField(max_length=255)
@@ -75,3 +76,13 @@ class Cell(Timestampable):
 
     class Meta:
         abstract = True
+
+
+class Embryo(Timestampable):
+    """
+    At each new generation, an embryo is spawned for each cell which is alive,
+    or is adjacent to a living cell. Embryos are used to generate the next
+    generation in chunks, rather than as a single unit.
+    """
+    generation = models.ForeignKey(Generation, related_name='embryos')
+    cell = models.OneToOne(Cell, related_name='+')
