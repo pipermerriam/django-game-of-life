@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Conways Game of Life{% endblock %}</title>
+
+    {% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/960_24_col.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/gameoflife.css' %}" />
+    {% endblock %}
+
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/ie.css?ver=1.0.0" />
+    <![endif]-->
+
+    {% block scripts %}
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/jquery.cookie.js' %}"></script>
+    <script src="{% static 'js/gameoflife.js' %}"></script>
+    {% include 'partials/google_analytics.html' with UA='UA-20823260-6' %}
+    {% endblock %}
+
+    <link rel="icon" href="{% static 'image/favicon.ico' %}" type="/image/x-icon" />
+    <link rel="shortcut icon" href="{% static 'image/favicon.ico' %}" type="/image/x-icon" />
+
+    {% block meta %}
+    {% endblock meta %}
+
+  </head>
+  <body>
+    <div id="primary_container" class="container_24">
+      {% block header %}
+        <header id="header">
+          <div class="grid_24">
+            <h1><a href="">Conways Game of Life</a></h1>
+          </div>
+          <nav id="top-nav" class="grid_24">
+            <a href="">Home</a>
+            <a href="">About</a>
+          </nav>
+          <div class="clear"></div>
+        </header>
+      {% endblock %}
+
+      {% block content %}
+      {% endblock %}
+
+      {% block footer %}
+        <footer id="footer">
+          <nav id="bottom-nav" class="grid_24">
+            <a href="">Home</a>
+            <a href="">About</a>
+          </nav>
+          <div class="clear"></div>
+        </footer>
+      {% endblock %}
+    </div>
+  </body>

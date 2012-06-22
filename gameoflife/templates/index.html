@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load markup %}
+
+{% block content %}
+  <section id="home">
+    <p>Select a world from the list below</p>
+    {% for world in worlds %}
+      <div class="world_listing">
+        <h2 class="title">{{ world.title }}</h2>
+        <ul class="meta">
+          <li>Generation: <span class="value">{{ world.generation }}</span></li>
+          <li>Status: <span class="value">{{ world.get_state_display }}</span></li>
+        </ul>
+      </div>
+    {% empty %}
+      <p>There are no worlds at this time</p>
+    {% endfor %}
+  </section>
+{% endblock %}

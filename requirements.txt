@@ -1,0 +1,14 @@
+-e git://github.com/aaronmerriam/django-pure-pagination.git@695209ec14b30efb7fdb78ca16ce5cd1a1aaefe5#egg=django_pure_pagination-dev
+-e git://github.com/fusionbox/django-fusionbox.git@master#egg=django_fusionbox-dev
+-e hg+http://bitbucket.org/andrewgodwin/south/@64fdcc52cd010e663b7a8b9ad592d4aa204807a2#egg=South-dev
+Django==1.4
+MySQL-python==1.2.3
+PIL==1.1.7
+django-cache-machine==0.6
+django-cachebuster==0.2.1
+django-compressor==1.1
+django-debug-toolbar==0.9.4
+django-extensions==0.7.1
+psycopg2==2.4.5
+python-memcached==1.48
+wsgiref==0.1.2

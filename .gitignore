@@ -1,4 +1,10 @@
-*.log
-*.pot
 *.pyc
-local_settings.py
+static/*
+media/*
+settings_local.py
+!.gitkeep
+src/
+build/
+tmp/
+sqlite_database
+.coverage
