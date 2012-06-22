@@ -1,8 +1,20 @@
-var World = Backbone.Model.extend({
-  promptTitle: function() {
-    var title = prompt("Please enter a title for this world:");
-    this.set({title: title});
-  }
+var Cell = Backbone.Model.extend({
+});
+
+var Cells = Backbone.Collection.extend({
+  model: Cell
+});
+
+var Row = Backbone.Model.extend({
+  initialize: function() {
+    this.cells = new Cells;
+    this.cells.url = '/asdfasdf/';
+    this.cells.on("reset", this.updateCounts);
+  },
+});
+
+var Board = Backbone.Collection.extend({
+  model: Row
 });
 
 
