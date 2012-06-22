@@ -120,3 +120,21 @@ div#breadcrumb { margin-bottom: 15px; color: #888; }
 div.pagination { text-align: center; margin: 10px 0 5px; }
 div.pagination span.pagination_meta { display: block; margin-bottom: 8px; }
 div.pagination span.page { margin: 0px 2px; }
+
+/* Game Board
+--------------------------------------------------------*/
+
+div.board { border: #000000 solid 2px; display: inline-block; }
+div.board div.row {}
+div.board div.row div.cell { display: inline-block; float: left; }
+
+div.board div.row.last div.cell { border-bottom: none; }
+div.board div.row div.cell.last { border-right: none; }
+div.board div.row div.cell { border-right: #AAA solid 1px; border-bottom: #AAA solid 1px; }
+
+div.board div.row div.cell.tiny { width: 5px; height: 5px; }
+div.board div.row div.cell.small { width: 10px; height: 10px; }
+div.board div.row div.cell.medium { width: 20px; height: 20px; }
+div.board div.row div.cell.large { width: 40px; height: 40px; }
+
+div.board div.row div.cell.alive { background-color: #CCCCCC; }

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}World: {{ world.title }} | {{ block.super }}{% endblock %}
+
+{% block content %}
+  <section id="world">
+    <div class="board">
+      {% for row in cells %}
+        <div class="row{% if forloop.last %} last{% endif %}">
+          {% for cell in row %}
+            {% if cell.is_alive %}
+              <div class="cell alive {{ scale }}{% if forloop.last %} last{% endif %}">
+              </div>
+            {% else %}
+              <div class="cell {{ scale }}{% if forloop.last %} last{% endif %}">
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div class="clear"></div>
+      {% endfor %}
+    </div>
+  </section>
+{% endblock %}

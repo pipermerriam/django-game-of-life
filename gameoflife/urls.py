@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     # url(r'^gameoflife/', include('gameoflife.foo.urls')),
 
     url(r'^$', 'world.views.index', name='site_index'),
+    url(r'^(?P<slug>[-a-z0-9_]+)/$', 'world.views.detail', name='detail'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
