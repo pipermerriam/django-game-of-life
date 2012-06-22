@@ -35,9 +35,6 @@ class World(Timestampable, Queryable):
 
     slug = AutoSlugField(populate_from='title')
 
-    class Meta:
-        abstract = True
-
 
 class Generation(Timestampable, Queryable):
     """
@@ -52,9 +49,6 @@ class Generation(Timestampable, Queryable):
     world = models.ForeignKey(World, related_name='generations')
 
     hash = models.CharField(max_length=255)
-
-    class Meta:
-        abstract = True
 
 
 class Cell(Timestampable):
@@ -74,9 +68,6 @@ class Cell(Timestampable):
     lat = models.IntegerField()
     long = models.IntegerField()
 
-    class Meta:
-        abstract = True
-
 
 class Embryo(Timestampable):
     """
@@ -85,4 +76,4 @@ class Embryo(Timestampable):
     generation in chunks, rather than as a single unit.
     """
     generation = models.ForeignKey(Generation, related_name='embryos')
-    cell = models.OneToOne(Cell, related_name='+')
+    cell = models.OneToOneField(Cell, related_name='+')

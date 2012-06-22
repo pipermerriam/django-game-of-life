@@ -1,12 +1,15 @@
 import datetime
 
 from django.contrib.gis.db import models
-from django.contrib.gis.db.query import QuerySet
+from django.contrib.gis.db.models.query import QuerySet
 
 
 class Timestampable(models.Model):
     created_at = models.DateTimeField(default=datetime.datetime.now)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        abstract = True
 
 
 class QuerySetManager(models.GeoManager):
@@ -23,6 +26,9 @@ class QuerySetManager(models.GeoManager):
 
 class Queryable(models.Model):
     objects = QuerySetManager()
+
+    class Meta:
+        abstract = True
 
     class QuerySet(QuerySet):
         pass
