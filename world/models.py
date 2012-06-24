@@ -1,8 +1,11 @@
 from django.contrib.gis.db import models
+from django.contrib.gis.db.models import Max
 
 from django_extensions.db.fields import AutoSlugField
 
-from gameoflife.behaviors import Timestampable, Queryable
+from gameoflife.behaviors import Queryable
+
+from fusionbox.behaviors import Timestampable
 
 
 class World(Timestampable, Queryable):
@@ -34,6 +37,9 @@ class World(Timestampable, Queryable):
 
     slug = AutoSlugField(populate_from='title')
 
+    def __unicode__(self):
+        return self.title
+
 
 class Generation(Timestampable, Queryable):
     """
@@ -44,10 +50,31 @@ class Generation(Timestampable, Queryable):
     The generation hash is the bitwise xor of all of the cell coordinates and
     states ordered by latitude, then longitude.
     """
-    generation = models.PositiveIntegerField()
+    generation = models.PositiveIntegerField(blank=True)
     world = models.ForeignKey(World, related_name='generations')
 
     hash = models.CharField(max_length=255)
+
+    class Meta:
+        unique_together = ('world', 'generation')
+
+    def save(self, *args, **kwargs):
+        if self.generation is None:
+            if not self.world.generations.exists():
+                self.generation = 0
+            else:
+                self.generation = self.world.generations.aggregate(Max('generation'))['generation__max'] + 1
+        super(Generation, self).save(*args, **kwargs)
+
+    def __unicode__(self):
+        if not self.id:
+            return u'{world} - unsaved generation'.format(
+                    world=unicode(self.world),
+                    )
+        return u'{world} - generation {i}'.format(
+                world=unicode(self.world),
+                i=self.generation,
+                )
 
 
 class Cell(Timestampable):
@@ -62,9 +89,17 @@ class Cell(Timestampable):
     - Dead cell with exactly 3 living neighbors.
     """
     generation = models.ForeignKey(Generation, related_name='cells')
-    child = models.OneToOneField('self', related_name='parent')
+    child = models.OneToOneField('self', related_name='parent', blank=True, null=True)
 
     is_alive = models.NullBooleanField()
 
     lat = models.IntegerField()
     long = models.IntegerField()
+
+    def __unicode__(self):
+        return u'{world} - {lat}, {long} - generation {i}'.format(
+                world=unicode(self.generation.world),
+                lat=self.lat,
+                long=self.long,
+                i=self.generation.generation,
+                )

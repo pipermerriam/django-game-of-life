@@ -1,10 +1,34 @@
+// The lowest level component, a single cell on the game board.
 var Cell = Backbone.Model.extend({
 });
 
+// A collection of cells.
 var Cells = Backbone.Collection.extend({
   model: Cell
 });
 
+// The view for each cell.
+var CellView = Backbone.View.extend({
+  tagName: "div",
+  className: "cell",
+  event: {
+    "click": "openDialog",
+  },
+
+  render: function() {
+    // Replace with better render function.
+    $(this.el).html('<div class="cell"></div>');
+  },
+
+  openDialog: function() {
+    // Replace with dialog box for modifying cell
+  },
+});
+
+/*
+ *  Commented till I know what is going on with backbone
+ *
+// A wrapper for the Cells Collection which represents a row of cells.
 var Row = Backbone.Model.extend({
   initialize: function() {
     this.cells = new Cells;
@@ -13,10 +37,19 @@ var Row = Backbone.Model.extend({
   },
 });
 
+// A collection of rows whic make up the game board.
 var Board = Backbone.Collection.extend({
   model: Row
 });
 
+var BoardView = Backbone.Collection.extend({
+  tagName: "div",
+  className: "board",
+  render: function() {
+    // render the game board
+  }
+});
+*/
 
 //
 // Ajax Send CSRF Protection

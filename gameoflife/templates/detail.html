@@ -9,10 +9,10 @@
         <div class="row{% if forloop.last %} last{% endif %}">
           {% for cell in row %}
             {% if cell.is_alive %}
-              <div class="cell alive {{ scale }}{% if forloop.last %} last{% endif %}">
+              <div id="{{ cell.id }}" class="cell alive {{ scale }}{% if forloop.last %} last{% endif %}">
               </div>
             {% else %}
-              <div class="cell {{ scale }}{% if forloop.last %} last{% endif %}">
+              <div id="{{ cell.id }}" class="cell {{ scale }}{% if forloop.last %} last{% endif %}">
               </div>
             {% endif %}
           {% endfor %}
@@ -22,3 +22,6 @@
     </div>
   </section>
 {% endblock %}
+<script type="text/javascript">
+
+</script>
