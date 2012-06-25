@@ -40,6 +40,10 @@ class World(Timestampable, Queryable):
     def __unicode__(self):
         return self.title
 
+    @property
+    def cells(self):
+        return self.generations.order_by('-generation')[0].cells.all()
+
 
 class Generation(Timestampable, Queryable):
     """
@@ -93,13 +97,11 @@ class Cell(Timestampable):
 
     is_alive = models.NullBooleanField()
 
-    lat = models.IntegerField()
-    long = models.IntegerField()
+    location = models.PointField()
+    objects = models.GeoManager()
 
     def __unicode__(self):
-        return u'{world} - {lat}, {long} - generation {i}'.format(
+        return u'{world} - point - generation {i}'.format(
                 world=unicode(self.generation.world),
-                lat=self.lat,
-                long=self.long,
                 i=self.generation.generation,
                 )

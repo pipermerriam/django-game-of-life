@@ -5,6 +5,7 @@
 {% block content %}
   <section id="world">
     <div class="board">
+      {% comment %}
       {% for row in cells %}
         <div class="row{% if forloop.last %} last{% endif %}">
           {% for cell in row %}
@@ -19,9 +20,10 @@
         </div>
         <div class="clear"></div>
       {% endfor %}
+      {% endcomment %}
     </div>
   </section>
-{% endblock %}
 <script type="text/javascript">
-
+  var cells = new Cells([{% for cell in cells %}{id: {{ cell.id }}}, {% endfor %}]);
 </script>
+{% endblock %}

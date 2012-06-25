@@ -1,10 +1,11 @@
 // The lowest level component, a single cell on the game board.
 var Cell = Backbone.Model.extend({
+  urlRoot: '/cells/'
 });
 
 // A collection of cells.
 var Cells = Backbone.Collection.extend({
-  model: Cell
+  model: Cell,
 });
 
 // The view for each cell.
@@ -25,9 +26,6 @@ var CellView = Backbone.View.extend({
   },
 });
 
-/*
- *  Commented till I know what is going on with backbone
- *
 // A wrapper for the Cells Collection which represents a row of cells.
 var Row = Backbone.Model.extend({
   initialize: function() {
@@ -37,9 +35,42 @@ var Row = Backbone.Model.extend({
   },
 });
 
+var Rows = Backbone.Collection.extend({
+  tagName: "div",
+  className: "row",
+  render: function() {
+    // render a row on the game board.
+  }
+});
+
 // A collection of rows whic make up the game board.
-var Board = Backbone.Collection.extend({
-  model: Row
+var Board = Backbone.Model.extend({
+  defaults: {
+      x_size: 20,
+      y_size: 15,
+      cell_size: 'medium',
+      cells: {},
+      x: 0,
+      y: 0,
+  },
+  getCell: function(x, y) {
+    /*
+     * If the cell is present in the internal cells hash, get it from there,
+     * otherwise, fetch it from the server.
+     */
+    if(this.cells[y] === undefined) {
+      this.cells[y] = {};
+    }
+    if(this.cells[y][x] === undefined) {
+      cell = new Cell({
+        x: x,
+        y: y,
+      });
+    } else {
+      cell = this.cells[y][x];
+    }
+    return cell;
+  }
 });
 
 var BoardView = Backbone.Collection.extend({
@@ -49,7 +80,6 @@ var BoardView = Backbone.Collection.extend({
     // render the game board
   }
 });
-*/
 
 //
 // Ajax Send CSRF Protection
