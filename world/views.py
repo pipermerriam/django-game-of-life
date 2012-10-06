@@ -73,4 +73,5 @@ def cell_view(request, cell):
     env['y'] = cell.location.y
     env['is_alive'] = cell.is_alive
     env['generation'] = cell.generation_id
+    env['world'] = cell.generation.world_id
     return HttpResponse(json.dumps(env), mimetype='application/json')

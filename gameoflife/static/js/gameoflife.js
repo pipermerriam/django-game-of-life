@@ -1,11 +1,11 @@
 // The lowest level component, a single cell on the game board.
 var Cell = Backbone.Model.extend({
-  urlRoot: '/cells/'
-});
-
-// A collection of cells.
-var Cells = Backbone.Collection.extend({
-  model: Cell,
+  urlRoot: '/cells/',
+  initialize: function() {
+    if(!this.get('id')) {
+      this.set('url', '/world/' + (String)(this.get('world')) + '/cells/' + (String)(this.get('x')) + '/' + (String)(this.get('y')) + '/');
+    }
+  }
 });
 
 // The view for each cell.
@@ -16,9 +16,23 @@ var CellView = Backbone.View.extend({
     "click": "openDialog",
   },
 
+  attributes: function() {
+    attrs = {};
+    classes = ['cell',];
+    if(!(this.model.get('id') === undefined)) {
+      attrs['id'] == 'cell_' + (String)(this.model.get('id'));
+    }
+    if(this.model.get('is_alive') === true) {
+      classes.concat(['is_alive',]);
+    }
+    attrs['class'] = classes.join(' ');
+    return attrs;
+  },
+
   render: function() {
     // Replace with better render function.
-    $(this.el).html('<div class="cell"></div>');
+    $(this.el).html('<div></div>');
+    return this;
   },
 
   openDialog: function() {
@@ -26,51 +40,66 @@ var CellView = Backbone.View.extend({
   },
 });
 
-// A wrapper for the Cells Collection which represents a row of cells.
-var Row = Backbone.Model.extend({
-  initialize: function() {
-    this.cells = new Cells;
-    this.cells.url = '/asdfasdf/';
-    this.cells.on("reset", this.updateCounts);
-  },
-});
-
-var Rows = Backbone.Collection.extend({
-  tagName: "div",
-  className: "row",
-  render: function() {
-    // render a row on the game board.
-  }
-});
-
-// A collection of rows whic make up the game board.
-var Board = Backbone.Model.extend({
+/*
+ *  Stores basic world information.
+ */
+var World = Backbone.Model.extend({
   defaults: {
       x_size: 20,
       y_size: 15,
-      cell_size: 'medium',
-      cells: {},
       x: 0,
       y: 0,
   },
+  urlRoot: '/world/',
+});
+
+/*
+ *  Game Board
+ */
+var Board = Backbone.Collection.extend({
+  model: Cell,
+  initialize: function() {
+    this.cells = [];
+    _.each(this.models, function(cell) {
+      this.setCell(cell.get('x'), cell.get('y'), cell);
+    });
+  },
+
+  url: function() {
+    return this.world.url() + '/cells/';
+  },
+  /*
+   * getCell(x, y)
+   *
+   * Gets a cell from the internal cell buffer.  If no cell is found, a new
+   * cell is initialized.
+   */
   getCell: function(x, y) {
-    /*
-     * If the cell is present in the internal cells hash, get it from there,
-     * otherwise, fetch it from the server.
-     */
     if(this.cells[y] === undefined) {
-      this.cells[y] = {};
+      this.cells[y] = [];
     }
     if(this.cells[y][x] === undefined) {
       cell = new Cell({
         x: x,
         y: y,
       });
+      cell.fetch();
     } else {
       cell = this.cells[y][x];
     }
     return cell;
-  }
+  },
+  /*
+   * setCell(x, y, cell)
+   *
+   * Sets a cell to the internal cell buffer.
+   */
+  setCell: function(x, y, cell) {
+    if(this.cells[y] === undefined) {
+      this.cells[y] = [];
+    }
+    this.cells[y][x] = cell;
+  },
 });
 
 var BoardView = Backbone.Collection.extend({
